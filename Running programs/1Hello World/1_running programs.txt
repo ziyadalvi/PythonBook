@@ -1,0 +1,20 @@
+% python # Start Python
+
+>>> import myfile # Run file; load module as a whole
+>>> myfile.title # Use its attribute names: '.' to qualify
+'The Meaning of Life'
+
+In general, the dot expression syntax object.attribute lets you fetch any attribute
+attached to any object, and is one of the most common operations in Python code.
+Here, we’ve used it to access the string variable title inside the module myfile—in
+other words, myfile.title.
+Alternatively, you can fetch (really, copy) names out of a module with from statements:
+
+% python # Start Python
+>>> from myfile import title # Run file; copy its names
+>>> title # Use name directly: no need to qualify
+'The Meaning of Life'
+
+As you’ll see in more detail later, from is just like an import, with an extra assignment
+to names in the importing component. Technically, from copies a module’s attributes,
+such that they become simple variables in the recipient—

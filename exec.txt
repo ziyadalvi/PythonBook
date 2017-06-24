@@ -1,0 +1,34 @@
+Using exec to Run Module Files
+Strictly speaking, there are more ways to run code stored in module files than have yet
+been presented here. For instance, the exec(open('module.py').read()) built-in function
+call is another way to launch files from the interactive prompt without having to
+import and later reload. Each such exec runs the current version of the code read from
+a file, without requiring later reloads (script1.py is as we left it after a reload in the prior
+section):
+
+% python
+>>> exec(open('script1.py').read())
+win32
+65536
+Spam!Spam!Spam!Spam!Spam!Spam!Spam!Spam!
+
+...Change script1.py in a text edit window to print 2 ** 32...
+>>> exec(open('script1.py').read())
+win32
+*whatever the number*
+Spam!... 
+
+The exec call has an effect similar to an import, but it doesn’t actually import the module
+—by default, each time you call exec this way it runs the file’s code anew, as though
+you had pasted it in at the place where exec is called. Because of that, exec does not
+require module reloads after file changes—it skips the normal module import logic.
+On the downside, because it works as if you’ve pasted code into the place where it is
+called, exec, like the from statement mentioned earlier, has the potential to silently
+overwrite variables you may currently be using. For example, our script1.py assigns to
+a variable named x. If that name is also being used in the place where exec is called, the
+name’s value is replaced:
+>>> x = 999
+>>> exec(open('script1.py').read()) # Code run in this namespace by default
+...same output...
+>>> x # Its assignments can overwrite names here
+'Spam!'
