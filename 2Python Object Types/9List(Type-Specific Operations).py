@@ -7,6 +7,10 @@ print(L)
 L.append('NI') #string mutation
 print(L)
 
-L.pop(2)
+L.pop(2) #removes at an offset
+print(L)
+
+L = ['zz','iii','y','aaaaa','dddd']
+L.sort()
 print(L)
 
